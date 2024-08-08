@@ -78,7 +78,7 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
                 <option value="internship">Internship</option>
                 <option value="contract">Contract</option>
                 <option value="gig">Gig (one time pay off)</option>
-                <option value="joinTheTeam">Join the team</option>
+                <option value="fullTime">Full time</option>
               </select>
             </div>
           </div>
