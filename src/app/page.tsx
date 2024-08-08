@@ -6,6 +6,10 @@ import EmployeeDataPopUp from "@/components/employee-popup/add-employee-popup";
 
 export default function Home() {
   const [addEmployee, setAddEmployee] = React.useState(false);
+
+  function onAddemplyeeClose() {
+    setAddEmployee(false);
+  }
   return (
     <>
       <Header />
@@ -36,7 +40,7 @@ export default function Home() {
           </p>
         </div>
       </main>
-      {addEmployee && <EmployeeDataPopUp />}
+      {addEmployee && <EmployeeDataPopUp onClose={onAddemplyeeClose} />}
     </>
   );
 }

@@ -1,9 +1,18 @@
 import React from "react";
 
-export default function EmployeeDataPopUp() {
+interface EmployeeDataPopUpI {
+  onClose: () => void;
+}
+
+export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
   return (
     <>
-      <div className="fixed inset-0 bg-black/30">
+      <div
+        className="fixed inset-0 bg-black/30"
+        onClick={(e) => {
+          e.target === e.currentTarget && onClose();
+        }}
+      >
         <div className="top-20 right-0 bottom-14 absolute bg-[#1b1b1b] overflow-x-auto max-w-xl w-full rounded-l-xl p-2">
           <div className="bg-black/60 p-4 rounded-xl">
             <h2 className="text-2xl font-semibold">Basic Details</h2>
