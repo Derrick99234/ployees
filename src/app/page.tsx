@@ -1,27 +1,42 @@
-import Header from "@/components/Header/Header";
+"use client";
+import Header from "@/components/header/header";
 import Image from "next/image";
+import React from "react";
+import EmployeeDataPopUp from "@/components/employee-popup/add-employee-popup";
 
 export default function Home() {
+  const [addEmployee, setAddEmployee] = React.useState(false);
   return (
     <>
       <Header />
       <main className="flex min-h-screen flex-col items-center justify-center p-24">
-        <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px] flex-col">
+        <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
+        <div className="flex flex-col place-items-center">
           <Image
             src={
               "https://cdn.pixabay.com/photo/2017/08/31/11/43/man-2700445_640.png"
             }
             alt="Image of an employer standing"
-            width={2500}
-            height={400}
+            width={200}
+            height={350}
           />
           <h2 className="text-2xl font-semibold my-3">Welcome to PLYEES</h2>
           <p>
             Start by creating your first employee data, click{" "}
-            <span className="text-blue-400">here</span> to get started
+            <span
+              className="text-blue-400 cursor-pointer"
+              onClick={() => {
+                setAddEmployee(true);
+                console.log("Clicked on the span!!");
+              }}
+            >
+              here
+            </span>{" "}
+            to get started
           </p>
         </div>
       </main>
+      {addEmployee && <EmployeeDataPopUp />}
     </>
   );
 }
