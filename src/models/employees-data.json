@@ -10,7 +10,8 @@
     "acctName": "John Doe",
     "bankName": "Bank of America",
     "acctNumber": "1234567890",
-    "amount": "75000"
+    "amount": "75000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Jane",
@@ -23,7 +24,8 @@
     "acctName": "Jane Smith",
     "bankName": "Chase Bank",
     "acctNumber": "0987654321",
-    "amount": "85000"
+    "amount": "85000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Alice",
@@ -36,7 +38,8 @@
     "acctName": "Alice Johnson",
     "bankName": "Wells Fargo",
     "acctNumber": "1122334455",
-    "amount": "67000"
+    "amount": "67000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Bob",
@@ -49,7 +52,8 @@
     "acctName": "Bob Brown",
     "bankName": "Citibank",
     "acctNumber": "2233445566",
-    "amount": "40000"
+    "amount": "40000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Carol",
@@ -62,7 +66,8 @@
     "acctName": "Carol Davis",
     "bankName": "HSBC",
     "acctNumber": "3344556677",
-    "amount": "92000"
+    "amount": "92000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "David",
@@ -71,11 +76,12 @@
     "address": "987 Cedar St, Coast City",
     "jobTitle": "Data Scientist",
     "startDate": "2020-07-19",
-    "employmentType": "joinTheTeam",
+    "employmentType": "full-time",
     "acctName": "David Miller",
     "bankName": "Barclays",
     "acctNumber": "4455667788",
-    "amount": "99000"
+    "amount": "99000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Eve",
@@ -88,7 +94,8 @@
     "acctName": "Eve Wilson",
     "bankName": "Lloyds Bank",
     "acctNumber": "5566778899",
-    "amount": "71000"
+    "amount": "71000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Frank",
@@ -101,7 +108,8 @@
     "acctName": "Frank Martinez",
     "bankName": "RBC",
     "acctNumber": "6677889900",
-    "amount": "54000"
+    "amount": "54000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Grace",
@@ -114,7 +122,8 @@
     "acctName": "Grace Garcia",
     "bankName": "Santander",
     "acctNumber": "7788990011",
-    "amount": "88000"
+    "amount": "88000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Hank",
@@ -127,7 +136,8 @@
     "acctName": "Hank Rodriguez",
     "bankName": "TD Bank",
     "acctNumber": "8899001122",
-    "amount": "65000"
+    "amount": "65000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Ivy",
@@ -140,7 +150,8 @@
     "acctName": "Ivy Martinez",
     "bankName": "Bank of America",
     "acctNumber": "9900112233",
-    "amount": "60000"
+    "amount": "60000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Jack",
@@ -153,7 +164,8 @@
     "acctName": "Jack White",
     "bankName": "Chase Bank",
     "acctNumber": "0011223344",
-    "amount": "94000"
+    "amount": "94000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Kara",
@@ -166,7 +178,8 @@
     "acctName": "Kara Harris",
     "bankName": "Wells Fargo",
     "acctNumber": "1122334455",
-    "amount": "86000"
+    "amount": "86000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Leo",
@@ -179,7 +192,8 @@
     "acctName": "Leo Clark",
     "bankName": "Citibank",
     "acctNumber": "2233445566",
-    "amount": "78000"
+    "amount": "78000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Mia",
@@ -188,127 +202,25 @@
     "address": "654 Pine St, Star City",
     "jobTitle": "Content Writer",
     "startDate": "2018-07-15",
-    "employmentType": "joinTheTeam",
+    "employmentType": "full-time",
     "acctName": "Mia Walker",
     "bankName": "HSBC",
     "acctNumber": "3344556677",
-    "amount": "63000"
+    "amount": "63000",
+    "picture": "https://picsum.photos/200"
   },
   {
     "firstName": "Nathan",
     "lastName": "Hall",
     "email": "nathan.hall@example.com",
-    "address": "987 Birch St, Central City",
-    "jobTitle": "Web Developer",
-    "startDate": "2019-11-25",
-    "employmentType": "full-time",
-    "acctName": "Nathan Hall",
-    "bankName": "Barclays",
-    "acctNumber": "4455667788",
-    "amount": "72000"
-  },
-  {
-    "firstName": "Olivia",
-    "lastName": "Young",
-    "email": "olivia.young@example.com",
-    "address": "321 Maple St, Coast City",
+    "address": "987 Maple St, Coast City",
     "jobTitle": "Graphic Designer",
-    "startDate": "2020-08-17",
+    "startDate": "2021-08-25",
     "employmentType": "freelancer",
-    "acctName": "Olivia Young",
-    "bankName": "Lloyds Bank",
-    "acctNumber": "5566778899",
-    "amount": "70000"
-  },
-  {
-    "firstName": "Paul",
-    "lastName": "King",
-    "email": "paul.king@example.com",
-    "address": "456 Spruce St, Gotham",
-    "jobTitle": "SEO Specialist",
-    "startDate": "2021-09-29",
-    "employmentType": "contract",
-    "acctName": "Paul King",
-    "bankName": "RBC",
-    "acctNumber": "6677889900",
-    "amount": "68000"
-  },
-  {
-    "firstName": "Quincy",
-    "lastName": "Scott",
-    "email": "quincy.scott@example.com",
-    "address": "789 Poplar St, Metropolis",
-    "jobTitle": "Social Media Manager",
-    "startDate": "2018-02-14",
-    "employmentType": "internship",
-    "acctName": "Quincy Scott",
-    "bankName": "Santander",
-    "acctNumber": "7788990011",
-    "amount": "54000"
-  },
-  {
-    "firstName": "Rachel",
-    "lastName": "Green",
-    "email": "rachel.green@example.com",
-    "address": "123 Chestnut St, Central City",
-    "jobTitle": "Sales Representative",
-    "startDate": "2019-10-05",
-    "employmentType": "full-time",
-    "acctName": "Rachel Green",
-    "bankName": "TD Bank",
-    "acctNumber": "8899001122",
-    "amount": "76000"
-  },
-  {
-    "firstName": "Sam",
-    "lastName": "Baker",
-    "email": "sam.baker@example.com",
-    "address": "456 Cedar St, Coast City",
-    "jobTitle": "Customer Support",
-    "startDate": "2020-05-22",
-    "employmentType": "freelancer",
-    "acctName": "Sam Baker",
-    "bankName": "Bank of America",
-    "acctNumber": "9900112233",
-    "amount": "62000"
-  },
-  {
-    "firstName": "Tina",
-    "lastName": "Adams",
-    "email": "tina.adams@example.com",
-    "address": "789 Willow St, Springfield",
-    "jobTitle": "Software Tester",
-    "startDate": "2018-01-13",
-    "employmentType": "full-time",
-    "acctName": "Tina Adams",
-    "bankName": "Chase Bank",
-    "acctNumber": "0011223344",
-    "amount": "69000"
-  },
-  {
-    "firstName": "Uma",
-    "lastName": "Nelson",
-    "email": "uma.nelson@example.com",
-    "address": "321 Elm St, Metropolis",
-    "jobTitle": "Systems Analyst",
-    "startDate": "2019-04-18",
-    "employmentType": "contract",
-    "acctName": "Uma Nelson",
-    "bankName": "Wells Fargo",
-    "acctNumber": "1122334455",
-    "amount": "81000"
-  },
-  {
-    "firstName": "Victor",
-    "lastName": "Carter",
-    "email": "victor.carter@example.com",
-    "address": "654 Oak St, Gotham",
-    "jobTitle": "Network Administrator",
-    "startDate": "2021-11-09",
-    "employmentType": "gig",
-    "acctName": "Victor Carter",
-    "bankName": "Citibank",
-    "acctNumber": "2233445566",
-    "amount": "77000"
+    "acctName": "Nathan Hall",
+    "bankName": "HSBC",
+    "acctNumber": "4455667788",
+    "amount": "72000",
+    "picture": "https://picsum.photos/200"
   }
 ]
