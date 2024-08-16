@@ -1,14 +1,40 @@
 import React from "react";
+import { AddEmployeePopup, Employee } from "@/app/interface/employee-interface";
 
 interface EmployeeDataPopUpI {
   onClose: () => void;
+  addEmployee: AddEmployeePopup;
 }
 
-export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
+export default function EmployeeDataPopUp({
+  onClose,
+  addEmployee,
+}: EmployeeDataPopUpI) {
+  const [formData, setFormData] = React.useState<Employee>({
+    email: addEmployee.data?.email || "",
+    firstName: addEmployee.data?.firstName || "",
+    lastName: addEmployee.data?.lastName || "",
+    address: addEmployee.data?.address || "",
+    jobTitle: addEmployee.data?.jobTitle || "",
+    startDate: addEmployee.data?.startDate || "",
+    employmentType: addEmployee.data?.employmentType || "",
+    accountName: addEmployee.data?.accountName || "",
+    bankName: addEmployee.data?.bankName || "",
+    accountNumber: addEmployee.data?.accountNumber || "",
+    amount: addEmployee.data?.amount || "",
+    picture: addEmployee.data?.picture || "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
   return (
     <>
       <div
-        className="fixed inset-0 bg-black/30"
+        className="fixed inset-0 bg-black/30 z-[100]"
         onClick={(e) => {
           e.target === e.currentTarget && onClose();
         }}
@@ -22,6 +48,9 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
                 <input
                   type="text"
                   placeholder="First Name"
+                  id="firstName"
+                  onChange={handleChange}
+                  value={formData.firstName}
                   className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
                 />
               </div>
@@ -29,6 +58,9 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
                 <label htmlFor="lastName">Last Name</label>
                 <input
                   type="text"
+                  id="lastName"
+                  onChange={handleChange}
+                  value={formData.lastName}
                   placeholder="Last Name"
                   className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
                 />
@@ -38,6 +70,9 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
             <input
               type="email"
               placeholder="Email"
+              id="email"
+              onChange={handleChange}
+              value={formData.email}
               className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
             />
           </div>
@@ -48,6 +83,9 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
               <input
                 type="text"
                 placeholder="Address"
+                id="address"
+                onChange={handleChange}
+                value={formData.address}
                 className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
               />
             </div>
@@ -55,6 +93,9 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
               <label htmlFor="jobTitle">Job Title</label>
               <input
                 type="text"
+                id="jobTitle"
+                onChange={handleChange}
+                value={formData.jobTitle}
                 placeholder="Job Title"
                 className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
               />
@@ -63,6 +104,9 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
               <label htmlFor="startDate">Start Date</label>
               <input
                 type="date"
+                id="startDate"
+                onChange={handleChange}
+                value={formData.startDate}
                 placeholder="Start Date"
                 className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
               />
@@ -72,6 +116,8 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
               <select
                 name="employmentType"
                 id="employmentType"
+                onChange={handleChange}
+                value={formData.employmentType}
                 className="w-full py-2 border focus:outline-none border-gray-300  bg-[#1b1b1b] px-4 rounded-lg"
               >
                 <option value="freelancer">Freelancer</option>
@@ -86,10 +132,13 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
             <h2 className="text-2xl font-semibold">Salary Details</h2>
             <div className="flex justify-center items-center gap-3 my-4">
               <div className="">
-                <label htmlFor="acctName">Account Name</label>
+                <label htmlFor="accountName">Account Name</label>
                 <input
                   type="text"
                   placeholder="Account Name"
+                  id="accountName"
+                  onChange={handleChange}
+                  value={formData.accountName}
                   className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
                 />
               </div>
@@ -97,16 +146,22 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
                 <label htmlFor="bankName">Bank Name</label>
                 <input
                   type="text"
+                  id="bankName"
+                  onChange={handleChange}
+                  value={formData.bankName}
                   placeholder="Bank Name"
                   className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
                 />
               </div>
             </div>
             <div className="mt-3">
-              <label htmlFor="acctNumber">Account Number</label>
+              <label htmlFor="accountNumber">Account Number</label>
               <input
                 type="number"
                 placeholder="Account Number"
+                id="accountNumber"
+                onChange={handleChange}
+                value={formData.accountNumber}
                 className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
                 minLength={10}
                 maxLength={10}
@@ -116,12 +171,15 @@ export default function EmployeeDataPopUp({ onClose }: EmployeeDataPopUpI) {
               <label htmlFor="amount">Amount</label>
               <input
                 type="number"
+                id="amount"
+                onChange={handleChange}
+                value={formData.amount}
                 placeholder="Amount"
                 className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
               />
             </div>
             <button className="bg-blue-900 w-full py-2 mt-5">
-              Add employee
+              {addEmployee.type == "edit" ? "Update employee" : "Add employee"}
             </button>
           </div>
         </div>
