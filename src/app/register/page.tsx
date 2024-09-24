@@ -23,49 +23,42 @@ export default function Register() {
   const router = useRouter()
 
   const validateInputField = () => {
-    setErrors("")
+    setErrors("");
+    
     if (!firstName) {
-      setErrors("Please enter your first name")
-      return
+      return "Please enter your first name";
     }
     if (!lastName) {
-      setErrors("Please enter your last name")
-      return
+      return "Please enter your last name";
     }
-
     if (!email) {
-      setErrors("Please enter your email")
-      return
+      return "Please enter your email";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setErrors("Please enter a valid email")
-      return
+      return "Please enter a valid email";
     }
     if (!password) {
-      setErrors("Please enter a password")
-      return
+      return "Please enter a password";
     } else if (password.length < 8) {
-      setErrors("Password must be at least 8 characters long")
-      return
+      return "Password must be at least 8 characters long";
     }
     if (!companyName) {
-      setErrors("Please enter your company name")
-      return
+      return "Please enter your company name";
     }
-    return null // No validation errors found
-  }
-
-
+  
+    return null; // No validation errors found
+  };
+  
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    validateInputField()
-
+    e.preventDefault();
+    setLoading(true);
+    
     const error = validateInputField();
     if (error) {
-        setLoading(false);
-        return; // Exit early if there are validation errors
+      setErrors(error); 
+      setLoading(false); 
+      return; 
     }
-
+  
     try {
       const response = await axios.post("http://localhost:2024/auth/register", {
         firstName,
@@ -77,18 +70,20 @@ export default function Register() {
         headers: {
           "Content-Type": "application/json",
         },
+      });
+  
+      const data: any = response.data;
+      if (!data.error) {
+        alert("Registration successful!");
+        router.push("/login");
       }
-      )
-      if (!response.error) {
-        alert("Registration successful!")
-        router.push("/login")
-      } 
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+  
   return (
     <>
       <div className="flex items-center justify-center min-h-screen flex-col text-white bg-gray-800">
