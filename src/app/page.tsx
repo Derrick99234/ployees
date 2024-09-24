@@ -1,6 +1,4 @@
 "use client";
-
-import Header from "@/components/header/header";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -12,6 +10,7 @@ import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { IoAddCircleSharp } from "react-icons/io5";
 import Link from "next/link";
 import { Employee, AddEmployeePopup } from "@/app/interface/employee-interface";
+import Header from "@/components/Header/Header";
 
 export default function Home() {
   const [addEmployee, setAddEmployee] = useState<AddEmployeePopup>({
@@ -58,7 +57,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-slate-800 p-24 text-white">
         <div className="flex justify-center items-center gap-5 my-4">
           <div className="w-52 justify-between p-4 flex gap-3 bg-[crimson] items-center rounded-lg">
             <div className="">
@@ -116,13 +115,13 @@ export default function Home() {
                         height={60}
                         className="mx-auto rounded-full h-16 w-16"
                       />
-                      <h2 className="text-2xl font-semibold mt-2">
+                      <h2 className="text-2xl font-semibold mt-2 text-white">
                         {employee?.firstName} {employee?.lastName}
                       </h2>
                       <p className="text-gray-200 text-xs">
                         {employee.jobTitle}
                       </p>
-                      <p className="text-sm">{employee.email}</p>
+                      <p className="text-sm text-white">{employee.email}</p>
                     </div>
                   </Link>
                 );
