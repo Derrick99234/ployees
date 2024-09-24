@@ -58,6 +58,7 @@ export default function Login() {
       const data: any = response.data;
       if (!data.error) {
         alert("Login successful!")
+        localStorage.setItem("token", data.token);
         router.push("/")
       } 
     } catch (error) {
