@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AddEmployeePopup, Employee } from "@/app/interface/employee-interface";
+import { useCompany } from "@/context/CompanyContext";
 
 interface EmployeeDataPopUpI {
   onClose: () => void;
@@ -31,6 +32,32 @@ export default function EmployeeDataPopUp({
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:2024";
+  const { companyData, loading} = useCompany()
+
+  async function addEmployees(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${BASE_URL}/employee/add-employee`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({...formData, companyId: companyData._id, picture: "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg"}),
+        }
+      );
+      const data = await response.json();
+      console.log(response)
+      console.log(data)
+      // onClose(); 
+    } catch (error) {
+      console.error("Error adding employee:", error);
+    }
+  }
+  if (loading) return <div className="w-10/12 ml-auto min-h-screen p-10">Loading...</div>;
   return (
     <>
       <div
@@ -39,7 +66,7 @@ export default function EmployeeDataPopUp({
           e.target === e.currentTarget && onClose();
         }}
       >
-        <div className="top-20 right-0 bottom-14 absolute bg-[#1b1b1b] overflow-x-auto max-w-xl w-full rounded-l-xl p-2">
+        <form className="top-20 right-0 bottom-14 absolute bg-[#1b1b1b] overflow-x-auto max-w-xl w-full rounded-l-xl p-2" onSubmit={addEmployees}>
           <div className="bg-black/60 p-4 rounded-xl">
             <h2 className="text-2xl font-semibold">Basic Details</h2>
             <div className="flex justify-center items-center gap-3 my-4">
@@ -178,11 +205,11 @@ export default function EmployeeDataPopUp({
                 className="w-full py-2 border focus:outline-none border-gray-300 bg-transparent px-4 rounded-lg"
               />
             </div>
-            <button className="bg-blue-900 w-full py-2 mt-5">
+            <button className="bg-blue-900 w-full py-2 mt-5" type="submit">
               {addEmployee.type == "edit" ? "Update employee" : "Add employee"}
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
