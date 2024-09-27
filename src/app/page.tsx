@@ -11,6 +11,10 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import Link from "next/link";
 import { Employee, AddEmployeePopup } from "@/app/interface/employee-interface";
 import Header from "@/components/Header/Header";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { CompanyDataT } from "./interface/company-interface";
+import { useCompany } from "@/context/CompanyContext";
 
 export default function Home() {
   const [addEmployee, setAddEmployee] = useState<AddEmployeePopup>({
@@ -24,12 +28,16 @@ export default function Home() {
 
   useEffect(() => {
     setEmployees([...employeeData]);
+  }, [])
+
+  useEffect(() => {
     let previousSalary = 0;
     employees.forEach((employee) => {
       previousSalary += +employee.amount;
     });
     setSalary(previousSalary);
-  }, [employees]);
+  }, [employees])
+  
 
   function closeEmployeePopup() {
     setAddEmployee({ isShown: false, type: "add", data: null });
@@ -53,7 +61,43 @@ export default function Home() {
     );
 
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const [message, setMessage] = useState("")
+  const { companyData, setCompanyData , setLoading, loading} = useCompany()
 
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage("")
+    }, 3000)
+  }, [message])
+
+  const router = useRouter()
+  const token = localStorage.getItem("token") as string
+  useEffect(() => {
+    async function getCompanyData() {
+      setLoading(true);
+      try {
+        const response = await axios.get("http://localhost:2024/company/get-company", {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+      });
+        const data: any = response.data
+        setCompanyData(data);
+        setLoading(false);
+        console.log(data);
+      } catch (error) {
+        setMessage("Failed to load company data");
+        console.log(error);
+        router.push('/login')
+      } finally {
+        setLoading(false);
+      }
+    }
+    getCompanyData();
+  }, [])
+
+  if (loading) return <div className="w-10/12 ml-auto min-h-screen p-10">Loading...</div>;
   return (
     <>
       <Header />
@@ -172,7 +216,7 @@ export default function Home() {
               width={200}
               height={350}
             />
-            <h2 className="text-2xl font-semibold my-3">Welcome to PLYEES</h2>
+            <h2 className="text-2xl font-semibold my-3">Welcome to PLOYEES</h2>
             <p>
               Start by creating your first employee data, click{" "}
               <span
