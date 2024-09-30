@@ -3,7 +3,6 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import EmployeeDataPopUp from "@/components/employee-popup/add-employee-popup";
-import employeeData from "@/models/employees-data.json";
 import { BsPeople } from "react-icons/bs";
 import { IoExitOutline } from "react-icons/io5";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
@@ -13,8 +12,8 @@ import { Employee, AddEmployeePopup } from "@/app/interface/employee-interface";
 import Header from "@/components/Header/Header";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { CompanyDataT } from "./interface/company-interface";
 import { useCompany } from "@/context/CompanyContext";
+import { useEmployee } from "@/context/EmployeeContext";
 
 export default function Home() {
   const [addEmployee, setAddEmployee] = useState<AddEmployeePopup>({
@@ -22,47 +21,11 @@ export default function Home() {
     type: "add",
     data: null,
   });
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const {employees, setEmployees} = useEmployee()
 
   const [salary, setSalary] = React.useState<number>(0);
-
-  useEffect(() => {
-    setEmployees([...employeeData]);
-  }, [])
-
-  useEffect(() => {
-    let previousSalary = 0;
-    employees.forEach((employee) => {
-      previousSalary += +employee.amount;
-    });
-    setSalary(previousSalary);
-  }, [employees])
-  
-
-  function closeEmployeePopup() {
-    setAddEmployee({ isShown: false, type: "add", data: null });
-  }
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [employeesPerPage] = useState(6);
-
-  const indexOfLastEmployee = currentPage * employeesPerPage;
-  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = employees.slice(
-    indexOfFirstEmployee,
-    indexOfLastEmployee
-  );
-
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  const nextPage = () =>
-    setCurrentPage((prev) =>
-      Math.min(prev + 1, Math.ceil(employees.length / employeesPerPage))
-    );
-
-  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const [message, setMessage] = useState("")
-  const { companyData, setCompanyData , setLoading, loading} = useCompany()
+  const { setCompanyData , setLoading, loading} = useCompany()
 
   useEffect(() => {
     setTimeout(() => {
@@ -72,6 +35,28 @@ export default function Home() {
 
   const router = useRouter()
   const token = localStorage.getItem("token") as string
+
+  async function getAllEmployees(){
+      setLoading(true);
+      try {
+        const response = await axios.get("http://localhost:2024/employee/get-all-employees", {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+      });
+        const data: any = response.data
+        console.log(data);
+        setEmployees(data);
+        setLoading(false);
+      } catch (error) {
+        setMessage("Failed to load employee data");
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+  }
+
   useEffect(() => {
     async function getCompanyData() {
       setLoading(true);
@@ -84,6 +69,7 @@ export default function Home() {
       });
         const data: any = response.data
         setCompanyData(data);
+        getAllEmployees()
         setLoading(false);
         console.log(data);
       } catch (error) {
@@ -97,6 +83,35 @@ export default function Home() {
     getCompanyData();
   }, [])
 
+    useEffect(() => {
+      let previousSalary = 0;
+      employees && employees.forEach((employee) => {
+        previousSalary += +employee.amount;
+      });
+      setSalary(previousSalary);
+    }, [employees])
+    
+  
+    function closeEmployeePopup() {
+      setAddEmployee({ isShown: false, type: "add", data: null });
+    }
+  
+    const [currentPage, setCurrentPage] = useState(1);
+    const [employeesPerPage] = useState(6);
+  
+    const indexOfLastEmployee = currentPage * employeesPerPage;
+    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+    const currentEmployees = employees?.slice(
+      indexOfFirstEmployee,
+      indexOfLastEmployee
+    );
+  
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+        const nextPage = () =>
+          setCurrentPage((prev) =>
+            Math.min(prev + 1, Math.ceil((employees || []).length / employeesPerPage))
+          );
   if (loading) return <div className="w-10/12 ml-auto min-h-screen p-10">Loading...</div>;
   return (
     <>
@@ -107,7 +122,7 @@ export default function Home() {
             <div className="">
               <span>Employee</span>
               <span className="block text-4xl font-bold">
-                {employees.length}
+                {employees?.length}
               </span>
             </div>
             <BsPeople className="text-5xl text-white" />
@@ -116,7 +131,7 @@ export default function Home() {
             <div className="">
               <span>Leaves</span>
               <span className="block text-4xl font-bold">
-                {employees.length}
+                {employees?.length}
               </span>
             </div>
             <IoExitOutline className="text-5xl text-white" />
@@ -144,10 +159,10 @@ export default function Home() {
         {employees && employees.length > 0 ? (
           <div className="min-h-dvh">
             <div className="grid grid-cols-3 gap-8 mt-6">
-              {currentEmployees.map((employee, index) => {
+              {currentEmployees?.map((employee, index) => {
                 return (
                   <Link
-                    href={`/employees/${employee?.id}`}
+                    href={`/employees/${employee?._id}`}
                     key={index}
                     passHref
                   >

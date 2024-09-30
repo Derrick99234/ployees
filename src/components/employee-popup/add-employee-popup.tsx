@@ -52,7 +52,7 @@ export default function EmployeeDataPopUp({
       const data = await response.json();
       console.log(response)
       console.log(data)
-      // onClose(); 
+      onClose(); 
     } catch (error) {
       console.error("Error adding employee:", error);
     }

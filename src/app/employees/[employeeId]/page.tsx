@@ -1,16 +1,17 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import employeeData from "@/models/employees-data.json";
 import { BsArrowLeft } from "react-icons/bs";
 import EmployeeDataPopUp from "@/components/employee-popup/add-employee-popup";
 import Link from "next/link";
 import { Employee, AddEmployeePopup } from "@/app/interface/employee-interface";
+import { useEmployee } from "@/context/EmployeeContext";
 export default function EmployeeDetail({ params }: any) {
   const [employee, setEmployee] = React.useState<Employee | null>(null);
+  const { employees} = useEmployee()
   React.useEffect(() => {
-    employeeData.forEach((employee) => {
-      if (employee.id == params.employeeId) {
+    employees?.forEach((employee) => {
+      if (employee._id == params.employeeId) {
         setEmployee(employee);
       }
     });
