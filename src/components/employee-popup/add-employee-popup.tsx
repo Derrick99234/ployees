@@ -34,29 +34,52 @@ export default function EmployeeDataPopUp({
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:2024";
   const { companyData, loading} = useCompany()
-
-  async function addEmployees(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `${BASE_URL}/employee/add-employee`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({...formData, companyId: companyData._id, picture: "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg"}),
-        }
-      );
-      const data = await response.json();
-      console.log(response)
-      console.log(data)
-      onClose(); 
-    } catch (error) {
-      console.error("Error adding employee:", error);
+  
+    async function addEmployees(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      try {
+        const response = await fetch(
+          `${BASE_URL}/employee/add-employee`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({...formData, companyId: companyData._id, picture: "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg"}),
+          }
+        );
+        const data = await response.json();
+        console.log(response)
+        console.log(data)
+        onClose(); 
+      } catch (error) {
+        console.error("Error adding employee:", error);
+      }
     }
-  }
+  
+    async function updateEmployee(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      try {
+        const response = await fetch(
+          `${BASE_URL}/employee/update-employee/${addEmployee.data?._id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({...formData})
+          }
+        );
+        const data = await response.json();
+        console.log(response)
+        console.log(data)
+        onClose(); 
+      } catch (error) {
+        console.error("Error adding employee:", error);
+      }
+    }
   if (loading) return <div className="w-10/12 ml-auto min-h-screen p-10">Loading...</div>;
   return (
     <>
@@ -66,7 +89,7 @@ export default function EmployeeDataPopUp({
           e.target === e.currentTarget && onClose();
         }}
       >
-        <form className="top-20 right-0 bottom-14 absolute bg-[#1b1b1b] overflow-x-auto max-w-xl w-full rounded-l-xl p-2" onSubmit={addEmployees}>
+        <form className="top-20 right-0 bottom-14 absolute bg-[#1b1b1b] overflow-x-auto max-w-xl w-full rounded-l-xl p-2" onSubmit={addEmployee.type === "edit" ? updateEmployee : addEmployees}>
           <div className="bg-black/60 p-4 rounded-xl">
             <h2 className="text-2xl font-semibold">Basic Details</h2>
             <div className="flex justify-center items-center gap-3 my-4">
