@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { BsArrowLeft } from "react-icons/bs";
+import { useRouter } from "next/navigation"
 import EmployeeDataPopUp from "@/components/employee-popup/add-employee-popup";
 import Link from "next/link";
 import { Employee, AddEmployeePopup } from "@/app/interface/employee-interface";
@@ -16,6 +17,32 @@ export default function EmployeeDetail({ params }: any) {
       }
     });
   });
+
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:2024";
+
+  const router = useRouter()
+  const handleDelete = async() => {
+  
+    try {
+      const response = await fetch(
+        `${BASE_URL}/employee/delete-employee/${employee?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          },
+          
+        }
+      );
+      const data = await response.json();
+      console.log(response)
+      router.push("/")
+      console.log(data)
+    } catch (error) {
+      console.error("Error adding employee:", error);
+    }
+  }
 
   const [addEmployee, setAddEmployee] = React.useState<AddEmployeePopup>({
     isShown: false,
@@ -80,7 +107,7 @@ export default function EmployeeDetail({ params }: any) {
           >
             Edit
           </button>
-          <button className="py-2 px-5 bg-red-700 text-white rounded-md">
+          <button className="py-2 px-5 bg-red-700 text-white rounded-md" onClick={handleDelete}>
             Delete Employee
           </button>
         </div>

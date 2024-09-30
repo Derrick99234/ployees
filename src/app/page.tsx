@@ -108,10 +108,10 @@ export default function Home() {
   
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
     const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
-        const nextPage = () =>
-          setCurrentPage((prev) =>
-            Math.min(prev + 1, Math.ceil((employees || []).length / employeesPerPage))
-          );
+    const nextPage = () =>
+      setCurrentPage((prev) =>
+        Math.min(prev + 1, Math.ceil((employees || []).length / employeesPerPage))
+      );
   if (loading) return <div className="w-10/12 ml-auto min-h-screen p-10">Loading...</div>;
   return (
     <>
@@ -127,7 +127,7 @@ export default function Home() {
             </div>
             <BsPeople className="text-5xl text-white" />
           </div>
-          <div className="w-52 justify-between p-4 flex gap-3 bg-[dodgerblue] items-center rounded-lg">
+          {/* <div className="w-52 justify-between p-4 flex gap-3 bg-[dodgerblue] items-center rounded-lg">
             <div className="">
               <span>Leaves</span>
               <span className="block text-4xl font-bold">
@@ -135,7 +135,7 @@ export default function Home() {
               </span>
             </div>
             <IoExitOutline className="text-5xl text-white" />
-          </div>
+          </div> */}
           <div className="w-52 justify-between p-4 flex gap-3 bg-[#36be36] items-center rounded-lg">
             <div className="">
               <span>Salaries</span>
